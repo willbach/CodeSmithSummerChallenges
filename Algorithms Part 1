@@ -1,0 +1,26 @@
+var sumLeft = function(array, index) {
+    var summedL = 0
+    for(var i = 0; i < index; i++) {
+        summedL += array[i];
+    }
+    return summedL
+}
+var sumRight = function(array, index) {
+    var summedR = 0
+    for(var i = array.length - 1; i > index; i--) {
+        summedR += array[i];
+    }
+    return summedR
+}
+var balanceIndex = function(array) {
+    if(array === []) { return "Error";}
+    var balance = 0;
+    for(var i = 0; i < array.length; i++) {
+        if(sumRight(array, i) === sumLeft(array, i)) {
+            balance = i;
+        }
+    }
+    return balance;
+}
+var testArray = [1, 1, 2, 3, 2, 0, 2, 1, 1, 1, 1, 1, 1, 1];
+console.log(balanceIndex(testArray));
