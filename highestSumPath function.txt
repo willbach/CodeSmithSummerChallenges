@@ -1,0 +1,29 @@
+var grid = [[1, 2, 3], [10, 20, 30], [100, 200, 300]];
+
+function highestSumPath(matrix) {
+  var highest = 0;
+  var highPath = [];
+  function findPath(i, j, sum, path) {
+    if(sum > highest) {
+      highest = sum;
+      highPath = path;
+    }
+    if(matrix[i] === undefined || matrix[i][j] === undefined) {
+      return null;
+    }
+    
+//recursion
+    else {
+      sum += matrix[i][j];
+      console.log(sum + path);
+      return findPath(i, j + 1, sum, path.concat("right")) ||
+        findPath(i + 1, j, sum, path.concat("down"));
+    }
+  }
+  findPath(0, 0, 0, []);
+  highPath.pop();
+  var highestPath = highPath.join(" ");
+  return {highestSum: highest, path: highestPath}
+}
+
+console.log(highestSumPath(grid));
